@@ -4,9 +4,10 @@
   "definitions": {
     "Settings": {
       "additionalProperties": false,
+      "description": "Settings file",
       "properties": {
         "want": {
-          "description": "Pick a list up to 5 numbers between -1 and 2048",
+          "description": "Pick a list up to 5 numbers or any word",
           "items": {
             "$ref": "#/definitions/UserChoice"
           },
@@ -15,10 +16,12 @@
         },
         "whatever": {
           "const": true,
+          "description": "Just assume it's true",
           "type": "boolean"
         },
         "you": {
-          "$ref": "#/definitions/User"
+          "$ref": "#/definitions/User",
+          "description": "What type of user are..."
         }
       },
       "required": [
@@ -28,10 +31,14 @@
       "type": "object"
     },
     "User": {
+      "description": "Supported users",
       "enum": [
         "developer",
         "administrator",
-        "operator"
+        "operator",
+        "robot",
+        "randomreader",
+        "anonymous"
       ],
       "type": "string"
     },
@@ -43,16 +50,20 @@
         {
           "$ref": "#/definitions/UserChoiceWord"
         }
-      ]
+      ],
+      "description": "Supported user choices"
     },
     "UserChoiceNumber": {
+      "description": "Supported numbers",
       "maximum": 2048,
       "minimum": -1,
       "multipleOf": 1,
       "type": "number"
     },
     "UserChoiceWord": {
+      "description": "Supported words",
       "maxLength": 8,
+      "pattern": "^[a-z][a-z0-9]*$",
       "type": "string"
     }
   }
